@@ -3,7 +3,7 @@ package com.spring.boot.mariadb4j.autoconfiguration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "spring.boot.mariadb4j.datasource")
-public class DatasourceProperties {
+public class DatasourceProperties { 
     private String username;
     private String password;
     private String url;

@@ -24,9 +24,8 @@ public class MariaDB4jAutoConfiguration {
     private static final String DEFAULT_USERNAME = "su";
     private static final String DEFAULT_PASSWORD = "";
 
-    private static final String DEFAULT_BASE_DIR = "";
-    private static final String DEFAULT_DATA_DIR = "";
-    private static final String DEFAULT_LIB_DIR = "";
+    private static final String DEFAULT_DATA_DIR = null;
+    private static final String DEFAULT_LIB_DIR = null;
     private static final Integer DEFAULT_PORT = 0;
     private static final String DEFAULT_SOCKET = "";
 
@@ -42,13 +41,14 @@ public class MariaDB4jAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
     public MariaDB4jSpringService mariaDB4jSpringService() {
-        String baseDir = (StringUtils.isEmpty(mariaDB4jProperties.getBaseDir())) ? DEFAULT_BASE_DIR : mariaDB4jProperties.getBaseDir();
         String dataDir = (StringUtils.isEmpty(mariaDB4jProperties.getDataDir())) ? DEFAULT_DATA_DIR : mariaDB4jProperties.getDataDir();
         String libDir = (StringUtils.isEmpty(mariaDB4jProperties.getLibDir())) ? DEFAULT_LIB_DIR : mariaDB4jProperties.getLibDir();
         String socket = (StringUtils.isEmpty(mariaDB4jProperties.getSocket())) ? DEFAULT_SOCKET : mariaDB4jProperties.getSocket();
         Integer port = (mariaDB4jProperties.getPort() == null) ? DEFAULT_PORT : mariaDB4jProperties.getPort();
         MariaDB4jSpringService mariaDB4jSpringService = new MariaDB4jSpringService();
-        mariaDB4jSpringService.setDefaultBaseDir(baseDir);
+        if (mariaDB4jProperties.getBaseDir() != null) {
+            mariaDB4jSpringService.setDefaultBaseDir(mariaDB4jProperties.getBaseDir());
+        }
         mariaDB4jSpringService.setDefaultDataDir(dataDir);
         mariaDB4jSpringService.setDefaultLibDir(libDir);
         mariaDB4jSpringService.setDefaultPort(port);

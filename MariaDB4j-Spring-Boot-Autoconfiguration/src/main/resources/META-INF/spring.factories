@@ -1,1 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.spring.boot.mariadb4j.autoconfiguration.MariaDB4jAutoConfiguration
